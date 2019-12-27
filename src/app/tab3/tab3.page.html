@@ -1,9 +1,43 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Tab Three
+     設定
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content>
+ <!-- {{user}}-->
+  <ion-list>
+    <ion-item>
+      <ion-label>ビジネス勧誘をブロック</ion-label>
+      <ion-toggle slot="start" name="blueberry" checked></ion-toggle>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>連携アプリケーションを悪用した乗っ取り(Only For you)などをブロック</ion-label>
+      <ion-toggle slot="start" name="apple" (ionChange)="OFY($event,'crack')" checked></ion-toggle>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>その他スパムをブロック</ion-label>
+      <ion-toggle slot="start" name="grape" checked></ion-toggle>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>乗っ取られていることを相手にDMで通知する</ion-label>
+      <ion-toggle slot="start" name="kiwi" checked></ion-toggle>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>スパムDMの情報を提供し、精度向上に協力する</ion-label>
+      <ion-toggle slot="start" name="banana" checked></ion-toggle>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>先回りブロックを有効にする</ion-label>
+      <ion-toggle slot="start" name="cherry" checked></ion-toggle>
+    </ion-item>
+  </ion-list>
+  <ion-button expand="block">初期設定に戻す</ion-button>
+</ion-content>

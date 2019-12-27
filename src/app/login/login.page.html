@@ -1,0 +1,195 @@
+<style>
+  .box {
+    width: 40%;
+    margin: 0 auto;
+    background: rgba(255,255,255,0.2);
+    padding: 35px;
+    border: 2px solid #fff;
+    border-radius: 20px/50px;
+    background-clip: padding-box;
+    text-align: center;
+  }
+  .overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    transition: opacity 500ms;
+    visibility: hidden;
+    opacity: 0;
+  }
+  .tro {
+    position: fixed;
+    z-index: 400;
+    width: 100%;
+  }
+  .overlay:target {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  .popup {
+    margin: 70px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+    width: 30%;
+    position: relative;
+    transition: all 5s ease-in-out;
+  }
+  
+  .popup h2 {
+    margin-top: 0;
+    color: #333;
+    font-family: Tahoma, Arial, sans-serif;
+  }
+  .popup .close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    transition: all 200ms;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+  }
+  .popup .close:hover {
+    color: #06D85F;
+  }
+  .popup .content {
+    max-height: 30%;
+    overflow: auto;
+  }
+  .arrowDown{
+  
+  display: block;
+  left: 50%;
+  margin-bottom: 0%;
+  margin-left: -25px;
+  position: relative;
+    -moz-animation: bounce 3s infinite;
+      -webkit-animation: bounce 3s infinite;
+      animation: bounce 3s infinite;
+  }
+  .btn {
+  color: #212529;
+  background-color: #f8f9fa;
+  border-color: #f8f9fa;
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  text-decoration: none;
+  border: 1px solid transparent;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: .45rem;
+  transition: .15s;
+}
+.btn:hover {
+  background: #e5e5e5;
+}
+/*.btn:active{
+  transform: scale(0.98);
+}*/
+.btn:focus {
+  box-shadow: 0 0 0 0.2rem rgba(216,217,219,.5);
+  border-radius: .45rem;
+}
+
+  @media screen and (max-width: 700px){
+    .box{
+      width: 70%;
+    }
+    .popup{
+      width: 70%;
+    }
+  }
+  @-moz-keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      -moz-transform: translateY(0);
+      transform: translateY(0);
+    }
+    40% {
+      -moz-transform: translateY(-30px);
+      transform: translateY(-30px);
+    }
+    60% {
+      -moz-transform: translateY(-15px);
+      transform: translateY(-15px);
+    }
+  }
+  @-webkit-keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
+    }
+    40% {
+      -webkit-transform: translateY(-30px);
+      transform: translateY(-30px);
+    }
+    60% {
+      -webkit-transform: translateY(-15px);
+      transform: translateY(-15px);
+    }
+  }
+  .d {
+    background: linear-gradient(to bottom, #FFC778 0%, #f89174 100%);
+  }
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      -moz-transform: translateY(0);
+      -ms-transform: translateY(0);
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
+    }
+    40% {
+      -moz-transform: translateY(-30px);
+      -ms-transform: translateY(-30px);
+      -webkit-transform: translateY(-30px);
+      transform: translateY(-30px);
+    }
+    60% {
+      -moz-transform: translateY(-15px);
+      -ms-transform: translateY(-15px);
+      -webkit-transform: translateY(-15px);
+      transform: translateY(-15px);
+    }
+  }
+  
+  </style>
+<ion-header>
+  <ion-toolbar>
+    <ion-title style="text-align: center;">ログイン</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="login" style="color: #fff; text-align: center;">
+<h1 style="color: #fff;">Spila</h1>
+<p style="color: #fff;">TwitterのDMに押し寄せるスパムをブロック</p>
+
+    <div class="text-center">
+      <a width="88.41" height="116.41" (click)="login()" class="text-center btn btn-light" role="button" href="https://spmoveapi.herokuapp.com/twitter_auth">
+        <svg id="Logo_FIXED" width="62.41" height="62.41" data-name="Logo — FIXED" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+          <defs>
+            <style>.cls-1{fill:none;}.cls-2{fill:#1da1f2;}</style>
+        </defs>
+        <title>Twitter_Logo_Blue</title>
+        <rect class="cls-1" width="400" height="400"/>
+        <path class="cls-2" d="M153.62,301.59c94.34,0,145.94-78.16,145.94-145.94,0-2.22,0-4.43-.15-6.63A104.36,104.36,0,0,0,325,122.47a102.38,102.38,0,0,1-29.46,8.07,51.47,51.47,0,0,0,22.55-28.37,102.79,102.79,0,0,1-32.57,12.45,51.34,51.34,0,0,0-87.41,46.78A145.62,145.62,0,0,1,92.4,107.81a51.33,51.33,0,0,0,15.88,68.47A50.91,50.91,0,0,1,85,169.86c0,.21,0,.43,0,.65a51.31,51.31,0,0,0,41.15,50.28,51.21,51.21,0,0,1-23.16.88,51.35,51.35,0,0,0,47.92,35.62,102.92,102.92,0,0,1-63.7,22A104.41,104.41,0,0,1,75,278.55a145.21,145.21,0,0,0,78.62,23"/></svg><div class="text-center" style="position: relative; width: 16px; margin: 0 auto;">
+          <span class="spinner-border spinner-border-sm text-center" style="color: #1da1f2;" id="logs" role="status" aria-hidden="true">
+          </span>
+        </div>
+      <div style="color: #1da1f2;" id="logt">ログイン</div>
+    </a>
+  </div>
+  {{params}}
+    <h1></h1>
+</ion-content>

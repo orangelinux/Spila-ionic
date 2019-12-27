@@ -1,5 +1,7 @@
 {
   "name": "spmove-ionic",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

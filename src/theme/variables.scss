@@ -3,6 +3,10 @@
 
 /** Ionic CSS Variables **/
 :root {
+  --ion-item-background: transparent;
+  --ion-tab-bar-background: transparent;
+  --ion-toolbar-background: #fff;
+ // --ion-background-color: linear-gradient(0deg, rgba(13,15,73,1) 20%, rgba(45,191,253,1) 100%);
   /** primary **/
   --ion-color-primary: #3880ff;
   --ion-color-primary-rgb: 56, 128, 255;
@@ -75,3 +79,7 @@
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
 }
+/*.login {
+  background: rgb(13,15,73);
+ 
+  }*/
