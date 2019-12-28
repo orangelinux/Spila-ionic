@@ -11,7 +11,7 @@
   <ion-list>
     <ion-item>
       <ion-label>ビジネス勧誘をブロック</ion-label>
-      <ion-toggle slot="start" name="blueberry" checked></ion-toggle>
+      <ion-toggle slot="start" name="blueberry"  (ionChange)="OFY($event,'business')" checked></ion-toggle>
     </ion-item>
 
     <ion-item>
@@ -21,22 +21,22 @@
 
     <ion-item>
       <ion-label>その他スパムをブロック</ion-label>
-      <ion-toggle slot="start" name="grape" checked></ion-toggle>
+      <ion-toggle slot="start" name="grape"  (ionChange)="OFY($event,'otherspam')" checked></ion-toggle>
     </ion-item>
 
     <ion-item>
       <ion-label>乗っ取られていることを相手にDMで通知する</ion-label>
-      <ion-toggle slot="start" name="kiwi" checked></ion-toggle>
+      <ion-toggle slot="start" name="kiwi"  (ionChange)="OFY($event,'notify')" checked></ion-toggle>
     </ion-item>
 
     <ion-item>
       <ion-label>スパムDMの情報を提供し、精度向上に協力する</ion-label>
-      <ion-toggle slot="start" name="banana" checked></ion-toggle>
+      <ion-toggle slot="start" name="banana"  (ionChange)="OFY($event,'analysis')" checked></ion-toggle>
     </ion-item>
 
     <ion-item>
       <ion-label>先回りブロックを有効にする</ion-label>
-      <ion-toggle slot="start" name="cherry" checked></ion-toggle>
+      <ion-toggle slot="start" name="cherry"  (ionChange)="OFY($event,'ahead')" checked></ion-toggle>
     </ion-item>
   </ion-list>
   <ion-button expand="block">初期設定に戻す</ion-button>
