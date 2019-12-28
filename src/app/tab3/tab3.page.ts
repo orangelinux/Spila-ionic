@@ -42,15 +42,18 @@ export class Tab3Page {
       console.log(fnc);
     }
   }
-  async SetReset() {
+  async setreset() {
+    this.setVal();
     const loading = await this.loadingController.create({
       message: '通信中です..お待ちください...',
       translucent: true,
       cssClass: 'custom-class custom-loading'
     });
     loading.present();
-    console.log("otherspam");
-      this.http.get('https://spmoveapi.herokuapp.com/setreset?user=' + this.user + '&D1=' + this.D1 + '&D2=' + this.D2,{},{})
+    console.log("Setting reset");
+    var url = 'https://spmoveapi.herokuapp.com/setreset?user=' + this.user + '&D1=' + this.D1 + '&D2=' + this.D2;
+    console.log(url);
+      this.http.get(url, {}, {})
         .then(data => {
           console.log(data.data); 
           loading.dismiss();
@@ -59,6 +62,7 @@ export class Tab3Page {
   console.log(error.status);
 });
   }
+
   async SetSend(tf,change) {
     const loading = await this.loadingController.create({
       message: '通信中です..お待ちください...',
