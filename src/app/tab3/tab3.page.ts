@@ -19,14 +19,6 @@ export class Tab3Page {
   async OFY(ev,fnc) {
     console.log(ev);
       this.send(ev["detail"]["checked"], fnc);
-    const loading = await this.loadingController.create({
-      duration: 1000,
-      message: '通信中です..お待ちください...',
-      translucent: true,
-      cssClass: 'custom-class custom-loading'
-    });
-    return await loading.present();
-   
   }
   async send(tf, fnc) {
     console.log("OPEN SEND!");
@@ -34,10 +26,18 @@ export class Tab3Page {
     console.log(fnc);
     await this.setVal();
     if (fnc == "crack") {
+      const loading = await this.loadingController.create({
+        message: '通信中です..お待ちください...',
+        translucent: true,
+        cssClass: 'custom-class custom-loading'
+      });
+      loading.present();
       console.log("crack");
         this.http.get('https://spmoveapi.herokuapp.com/setting?TF=' +tf+ '&change=1&user=' + this.user + '&D1=' + this.D1 + '&D2=' + this.D2, {}, {})
-  .then(data => {
-    console.log(data.data); 
+          .then(data => {
+            console.log(data.data); 
+            loading.dismiss();
+
   })
   .catch(error => {
     console.log(error.status);
