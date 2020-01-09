@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { LoadingController } from '@ionic/angular';
+import { Router } from '@angular/router';
 import { HTTP } from '@ionic-native/http/ngx';
 @Component({
   selector: 'app-tab3',
@@ -12,10 +13,82 @@ export class Tab3Page {
   constructor(
     private http: HTTP,
     public storage: Storage,
+    public _router:Router,
     public loadingController: LoadingController) { }
   user: any;
   D1: any;
+  business: any;
+  notify: any;
+  otherspam: any;
+  crack: any;
+  ahead: any;
+  analysis: any;
   D2: any;
+  async ionViewWillEnter() {
+    console.log("ionviewwillenter");
+    await this.setVal();
+    await this.setr();
+  }
+  async logout() {
+    this.storage.remove('D1');
+    this.storage.remove('D2');
+    this.storage.remove('user');
+    this._router.navigate(["/login"]);
+  }
+
+  async setr() {
+    const loading = await this.loadingController.create({
+      message: '通信中です..お待ちください...',
+      translucent: true,
+    });
+    var url = 'https://spmoveapi.herokuapp.com/sendset?user=' + this.user + '&D1=' + this.D1 + '&D2=' + this.D2;
+    console.log(url);
+    loading.present();
+    this.http.get(url, {}, {})
+        .then(data => {
+          console.log(data.data); 
+          const replaced = data.data.replace(/"/g, "'");
+          console.log(replaced);
+          const obj = JSON.parse(data.data);
+          console.log(this.business);
+          console.log(obj.business);
+      if (obj.business == "y") {
+            this.business = true;
+          } else if (obj.business == "n") {
+            this.business = false;
+          }
+      if (obj.DMnotify == "y") {
+            this.notify = true;
+          } else if (obj.DMnotify == "n") {
+            this.notify = false;
+      }
+      if (obj.analysis == "y") {
+        this.analysis = true;
+      } else if (obj.analysis == "n") {
+        this.analysis = false;
+          }
+      if (obj.Ahead == "y") {
+        this.ahead = true;
+      } else if (obj.Ahead == "n") {
+        this.ahead = false;
+      }
+      if (obj.otherspam == "y") {
+        this.otherspam = true;
+      } else if (obj.otherspam == "n") {
+        this.otherspam = false;
+      }
+      if (obj.hack == "y") {
+        this.crack = true;
+      } else if (obj.hack == "n") {
+        this.crack = false;
+      }
+          loading.dismiss();
+}).catch(error => {
+  console.log(error.status);
+  console.log(error.error);
+  loading.dismiss();
+});
+  }
   async OFY(ev,fnc) {
     console.log(ev);
       this.send(ev["detail"]["checked"], fnc);
@@ -24,7 +97,6 @@ export class Tab3Page {
     console.log("OPEN SEND!");
     console.log(tf);
     console.log(fnc);
-    await this.setVal();
     if (fnc == "crack") {
       this.SetSend(tf, 1);
     } else if (fnc == "business") {
@@ -80,19 +152,21 @@ export class Tab3Page {
   console.log(error.status);
 });
   }
+
   async setVal() {
     console.log("open Setval!");
-      this.storage.get('user').then((val) => {
+      await this.storage.get('user').then((val) => {
         console.log('==', val);
           this.user = val;
       });
-      this.storage.get('D1').then((val) => {
+      await this.storage.get('D1').then((val) => {
         console.log('==', val);
           this.D1 = val;
       });
-      this.storage.get('D2').then((val) => {
+      await this.storage.get('D2').then((val) => {
         console.log('==', val);
           this.D2 = val;
       });
-    }
+  }
+  
 }

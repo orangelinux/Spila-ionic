@@ -11,33 +11,38 @@
   <ion-list>
     <ion-item>
       <ion-label>ビジネス勧誘をブロック</ion-label>
-      <ion-toggle slot="start" name="blueberry"  (ionChange)="OFY($event,'business')" checked></ion-toggle>
+      <ion-toggle slot="start" [(ngModel)]="business"  (ionChange)="OFY($event,'business')"></ion-toggle>
     </ion-item>
 
     <ion-item>
       <ion-label>連携アプリケーションを悪用した乗っ取り(Only For you)などをブロック</ion-label>
-      <ion-toggle slot="start" name="apple" (ionChange)="OFY($event,'crack')" checked></ion-toggle>
+      <ion-toggle slot="start" [(ngModel)]="crack" (ionChange)="OFY($event,'crack')"></ion-toggle>
     </ion-item>
 
     <ion-item>
       <ion-label>その他スパムをブロック</ion-label>
-      <ion-toggle slot="start" name="grape"  (ionChange)="OFY($event,'otherspam')" checked></ion-toggle>
+      <ion-toggle slot="start" [(ngModel)]="otherspam"  (ionChange)="OFY($event,'otherspam')"></ion-toggle>
     </ion-item>
 
     <ion-item>
       <ion-label>乗っ取られていることを相手にDMで通知する</ion-label>
-      <ion-toggle slot="start" name="kiwi"  (ionChange)="OFY($event,'notify')" checked></ion-toggle>
+      <ion-toggle slot="start" [(ngModel)]="notify"  (ionChange)="OFY($event,'notify')"></ion-toggle>
     </ion-item>
 
     <ion-item>
       <ion-label>スパムDMの情報を提供し、精度向上に協力する</ion-label>
-      <ion-toggle slot="start" name="banana"  (ionChange)="OFY($event,'analysis')" checked></ion-toggle>
+      <ion-toggle slot="start" [(ngModel)]="analysis"  (ionChange)="OFY($event,'analysis')"></ion-toggle>
     </ion-item>
 
     <ion-item>
       <ion-label>先回りブロックを有効にする</ion-label>
-      <ion-toggle slot="start" name="cherry"  (ionChange)="OFY($event,'ahead')" checked></ion-toggle>
+      <ion-toggle slot="start" [(ngModel)]="ahead"  (ionChange)="OFY($event,'ahead')"></ion-toggle>
     </ion-item>
   </ion-list>
-  <ion-button (click)="setreset()" expand="block">初期設定に戻す</ion-button>
+  <h1></h1>
+  <ion-button (click)="setreset()" expand="block"><ion-icon name="refresh"></ion-icon> 初期設定に戻す</ion-button>
+  <ion-button (click)="logout()" color="blue" fill="outline" expand="block"><ion-icon name="exit"></ion-icon> ログアウト</ion-button>
+  <ion-button (click)="logout()" color="success" fill="outline" expand="block"><ion-icon name="document"></ion-icon> 使用方法を見る</ion-button>
+  <ion-button (click)="logout()" color="medium" fill="outline" expand="block"><ion-icon name="copy"></ion-icon> 利用規約</ion-button>
+  <ion-button (click)="logout()" color="medium" fill="outline" expand="block"><ion-icon name="copy"></ion-icon> ライセンス</ion-button>
 </ion-content>

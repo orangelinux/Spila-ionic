@@ -7,6 +7,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { SecureStorage, SecureStorageObject } from '@ionic-native/secure-storage/ngx';
 import { TabsPage } from './tabs/tabs.page';
+import { Network } from '@ionic-native/network/ngx';
 import { Storage } from '@ionic/storage';
 @Component({
   selector: 'app-root',
@@ -17,6 +18,7 @@ export class AppComponent {
   params: any;
   constructor(
     private platform: Platform,
+    private network: Network,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private deeplinks: Deeplinks,

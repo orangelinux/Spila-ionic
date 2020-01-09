@@ -8,6 +8,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppRoutingModule } from './app-routing.module';
 import { HTTP } from '@ionic-native/http/ngx';
 import { AppComponent } from './app.component';
+import { Network } from '@ionic-native/network/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { IonicStorageModule } from '@ionic/storage';
 import { Deeplinks } from '@ionic-native/deeplinks/ngx';
@@ -19,6 +20,7 @@ import { Deeplinks } from '@ionic-native/deeplinks/ngx';
   providers: [
     StatusBar,
     HTTP,
+    Network,
     InAppBrowser,
     SplashScreen,
     Deeplinks,
