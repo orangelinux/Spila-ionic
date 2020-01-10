@@ -30,7 +30,7 @@ export class AppComponent {
 
   initializeApp() {
     this.platform.ready().then(() => {
-
+      this.statusBar.backgroundColorByHexString('#ffffff');
       this.deeplinks.route({
         '/login': TabsPage,
       }).subscribe(match => {

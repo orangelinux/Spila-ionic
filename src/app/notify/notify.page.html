@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>お知らせ</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-fab (click)="clear()" vertical="top" horizontal="end" edge slot="fixed">
+    <ion-fab-button><ion-icon name="trash"></ion-icon></ion-fab-button>
+  </ion-fab>
+  <div *ngIf="!list" style=" color: gray; padding: 100px 0px 0px 0px; text-align: center;">お知らせは現在ありません。</div>
+  <ion-list>
+    <ion-item *ngFor="let items of list">
+      <ion-label>{{items.title}}</ion-label>
+    </ion-item>
+    </ion-list>
+</ion-content>

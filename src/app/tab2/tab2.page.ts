@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HTTP } from '@ionic-native/http/ngx';
 import { Storage } from '@ionic/storage';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
@@ -15,7 +16,11 @@ export class Tab2Page {
   n4: any;
   notifyarray: any;
   resnotify: any;
-  constructor(private storage: Storage, private http: HTTP) { }
+  constructor(private _router: Router, private storage: Storage, private http: HTTP) { }
+  ionViewWillEnter() {
+    console.log("ionViewWillEnter");
+    this.viewnotify();
+  }
   ngOnInit() {
     console.log("NGONINIT");
     this.Newnotifycheck();
@@ -97,5 +102,10 @@ export class Tab2Page {
         console.log(this.resnotify);
       }
     });
- }
+  }
+  gonotify() {
+    console.log("gonotify");
+    this._router.navigate(["/notify"]);
+  }
+
 }
