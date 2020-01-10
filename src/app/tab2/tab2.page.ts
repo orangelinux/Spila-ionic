@@ -8,6 +8,7 @@ import { Storage } from '@ionic/storage';
 })
 export class Tab2Page {
   notify: any;
+  noupdate: any;
   notifyarray: any;
   resnotify: any;
   constructor(private storage: Storage, private http: HTTP) { }
@@ -16,41 +17,33 @@ export class Tab2Page {
     this.Newnotifycheck();
   }
   
-  Newnotifycheck() {
+  async Newnotifycheck() {
     this.http.get('https://spmoveapi.herokuapp.com/getnotify', {}, {})
       .then(data => {
-  
+        //ここからjsonの処理
         console.log(data.status);
-        console.log(data.data); // data received by server
+        console.log(data.data);
         var replaced = data.data.replace(/'/g, '"');
         console.log(replaced);
         var res = JSON.parse(replaced);
         var latest = res["latest"];
-        try {
-          this.storage.get('notify').then((val) => {
-            console.log('==', val);
-            const notifyarray = [];
-            if (!val) {
-              notifyarray.push(latest);
-              this.notifyarray = notifyarray;
-              console.log(this.notifyarray);
-            } else {
-              this.notify = val;
-              notifyarray.push(this.notify);
-              notifyarray.push(latest);
-            }
-            notifyarray.push(this.notify);
-          });
-        } catch {
-          this.notifyarray = this.notify;
-        }
-        this.storage.set('notify', this.notifyarray);
-
+        //ここまでjsonの処理　latestに中身が入る
         this.storage.get('notify').then((val) => {
           console.log('==', val);
-          this.resnotify = val;
-          console.log(this.resnotify);
+
+          try {
+            const old = val[0];
+            if (old == latest) {
+              console.log("更新なし");
+              this.noupdate = true;
+            } else {
+              this.setstorage(latest);
+            }
+          } catch {
+            this.setstorage(latest);
+          }
         })
+
       })
       .catch(error => {
         console.log(error);
@@ -59,6 +52,28 @@ export class Tab2Page {
         console.log(error.headers);
   
       });
-      
   }
+  async setstorage(ARRAY) {
+    console.log("boot setstorage");
+    try {
+      this.storage.get('notify').then((val) => {
+        this.notifyarray = val;
+        this.notifyarray.push(ARRAY);
+      });
+      this.viewnotify();
+    } catch {
+      console.log("ERR");
+    }
+  }
+  async viewnotify() {
+    console.log("boot viewnotify");
+    this.storage.get('notify').then((val) => {
+      if (val) {
+        this.resnotify = val;
+        console.log(this.resnotify);
+      } else {
+        console.log("val empty");
+      }
+    });
+ }
 }

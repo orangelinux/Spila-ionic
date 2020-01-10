@@ -18,7 +18,7 @@
       <ion-spinner></ion-spinner>
       <p>読み込み中...</p>
       </div>
-      <p>お知らせは現在ありません。</p>
+      <p *ngIf="noupdate" style="text-align: center;">お知らせは現在ありません。</p>
     </ion-card-content>
   </ion-card>
   <ion-card>
