@@ -14,10 +14,24 @@
     </ion-card-header>
   
     <ion-card-content>
-      <div style="text-align: center;">
+      <div *ngIf="!resnotify" style="text-align: center;">
       <ion-spinner></ion-spinner>
       <p>読み込み中...</p>
       </div>
+      <ion-list>
+        <ion-item *ngIf="n1">
+          <ion-label>{{n1.title}}</ion-label>
+        </ion-item>
+        <ion-item *ngIf="n2">
+          <ion-label>{{n2.title}}</ion-label>
+        </ion-item>
+        <ion-item *ngIf="n3">
+          <ion-label>{{n3.title}}</ion-label>
+        </ion-item>
+      </ion-list>
+ <div style="text-align: center" *ngIf="n4">
+  ...
+ </div>
       <p *ngIf="noupdate" style="text-align: center;">お知らせは現在ありません。</p>
     </ion-card-content>
   </ion-card>
