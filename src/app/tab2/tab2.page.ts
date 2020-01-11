@@ -152,10 +152,10 @@ export class Tab2Page {
           console.log(list[i]);
           if (i == 0) {
             if (list[i]["TF"] == "T") {
-              this.ri1 = "close-circle-outline";
+              this.ri1 = "checkmark-circle-outline";
               this.rt1 = "正常にスパム除去が完了しました。";
             } else {
-              this.ri1 = "alert";
+              this.ri1 = "close-circle-outline";
               this.rt1 = "スパム除去に失敗しました。再試行中です。";
             }
             var resJ = {
@@ -167,10 +167,10 @@ export class Tab2Page {
           }
           if (i == 1) {
           if (list[i]["TF"] == "T") {
-              this.ri2 = "close-circle-outline";
+              this.ri2 = "checkmark-circle-outline";
               this.rt2 = "正常にスパム除去が完了しました。";
             } else {
-              this.ri2 = "alert";
+              this.ri2 = "close-circle-outline";
               this.rt2 = "スパム除去に失敗しました。再試行中です。";
             }
             var resJ = {
@@ -182,10 +182,10 @@ export class Tab2Page {
           }
           if (i == 2) {
             if (list[i]["TF"] == "T") {
-              this.ri3 = "close-circle-outline";
+              this.ri3 = "checkmark-circle-outline";
               this.rt3 = "正常にスパム除去が完了しました。";
             } else {
-              this.ri3 = "alert";
+              this.ri3 = "close-circle-outline";
               this.rt3 = "スパム除去に失敗しました。再試行中です。";
             }
             var resJ = {
