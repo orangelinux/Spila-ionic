@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class NotifyPage implements OnInit {
   list: any;
+  RM: any;
   constructor(private _router: Router,private storage:Storage,public toastController:ToastController) { }
 
   ngOnInit() {
@@ -44,9 +45,10 @@ export class NotifyPage implements OnInit {
       message: '削除されました。',
       duration: 2000
     });
+    this.RM = true;
     setTimeout(() => {
       this.ext();
-  }, 2100);
+  }, 1500);
 
     toast.present();
   }

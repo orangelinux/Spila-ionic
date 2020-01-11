@@ -9,7 +9,7 @@
     <ion-fab-button><ion-icon name="trash"></ion-icon></ion-fab-button>
   </ion-fab>
   <div *ngIf="!list" style=" color: gray; padding: 100px 0px 0px 0px; text-align: center;">お知らせは現在ありません。</div>
-  <ion-list>
+  <ion-list *ngIf="!this.RM">
     <ion-item *ngFor="let items of list">
       <ion-label>{{items.title}}</ion-label>
     </ion-item>
