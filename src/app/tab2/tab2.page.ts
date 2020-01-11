@@ -38,19 +38,24 @@ export class Tab2Page {
         var latest = res["latest"];
         //ここまでjsonの処理　latestに中身が入る
         this.storage.get('notify').then((val) => {
-          console.log('==', val);
+          this.storage.get('notifyold').then((val2) => {
+            console.log('==', val);
 
-          try {
-            const old = val[0];
-            if (old == latest) {
-              console.log("更新なし");
-              this.noupdate = true;
-            } else {
+
+            try {
+
+              const old = val2;
+              if (old.title == latest.title) {
+                console.log("更新なし");
+                this.noupdate = true;
+              } else {
+                console.log("重複なし");
+                this.setstorage(latest);
+              }
+            } catch {
               this.setstorage(latest);
             }
-          } catch {
-            this.setstorage(latest);
-          }
+          })
         })
 
       })
@@ -73,7 +78,12 @@ export class Tab2Page {
         }
         this.notifyarray.push(ARRAY);
         this.storage.set('notify', this.notifyarray);
-      });
+        try {
+          this.storage.set('notifyold', this.notifyarray[0]);
+        } catch {
+          console.log('notifyold set error');
+        }
+        });
       await this.viewnotify();
     } catch {
       console.log("ERR");
@@ -100,6 +110,11 @@ export class Tab2Page {
       } else {
         console.log("val empty");
         console.log(this.resnotify);
+        this.n1 = false;
+        this.n2 = false;
+        this.n3 = false;
+        this.n4 = false;
+        this.noupdate = true;
       }
     });
   }

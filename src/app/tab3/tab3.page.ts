@@ -127,7 +127,14 @@ export class Tab3Page {
     console.log(url);
       this.http.get(url, {}, {})
         .then(data => {
-          console.log(data.data); 
+          console.log(data.data);
+          this.otherspam = true;
+          this.crack = true;
+          this.ahead = true;
+          this.business = true;
+          this.analysis = true;
+          this.notify = true;
+
           loading.dismiss();
 })
 .catch(error => {
