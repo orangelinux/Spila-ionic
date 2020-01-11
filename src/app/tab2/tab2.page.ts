@@ -9,17 +9,29 @@ import { Router } from '@angular/router';
 })
 export class Tab2Page {
   notify: any;
-  noupdate: any;
+  notifyEM: any;
+  loader: any;
+  loader2: any;
   n1: any;
   n2: any;
   n3: any;
   n4: any;
+  r1: any;
+  r2: any;
+  r3: any;
+  ri1: any;
+  ri2: any;
+  ri3: any;
+  rt1: any;
+  rt2: any;
+  rt3: any;
   notifyarray: any;
   resnotify: any;
   constructor(private _router: Router, private storage: Storage, private http: HTTP) { }
-  ionViewWillEnter() {
+  async ionViewWillEnter() {
     console.log("ionViewWillEnter");
-    this.viewnotify();
+    await this.viewnotify();
+    await this.getlog();
   }
   ngOnInit() {
     console.log("NGONINIT");
@@ -27,6 +39,7 @@ export class Tab2Page {
   }
   
   async Newnotifycheck() {
+    this.loader = true;
     await this.http.get('https://spmoveapi.herokuapp.com/getnotify', {}, {})
       .then(data => {
         //ここからjsonの処理
@@ -35,9 +48,10 @@ export class Tab2Page {
         var replaced = data.data.replace(/'/g, '"');
         console.log(replaced);
         var res = JSON.parse(replaced);
-        var latest = res["latest"];
+        var latest = res["latest"]; 
         //ここまでjsonの処理　latestに中身が入る
         this.storage.get('notify').then((val) => {
+          this.loader = false;
           this.storage.get('notifyold').then((val2) => {
             console.log('==', val);
 
@@ -47,9 +61,10 @@ export class Tab2Page {
               const old = val2;
               if (old.title == latest.title) {
                 console.log("更新なし");
-                this.noupdate = true;
+                this.notifyEM = true;
               } else {
                 console.log("重複なし");
+                this.notifyEM = false;
                 this.setstorage(latest);
               }
             } catch {
@@ -64,6 +79,7 @@ export class Tab2Page {
         console.log(error.status);
         console.log(error.error); // error message as string
         console.log(error.headers);
+        this.loader = false;
   
       });
   }
@@ -114,7 +130,7 @@ export class Tab2Page {
         this.n2 = false;
         this.n3 = false;
         this.n4 = false;
-        this.noupdate = true;
+        this.notifyEM = true;
       }
     });
   }
@@ -122,5 +138,72 @@ export class Tab2Page {
     console.log("gonotify");
     this._router.navigate(["/notify"]);
   }
-
+  async getlog() {
+    this.loader2 = true;
+    await this.http.get('https://spmoveapi.herokuapp.com/getlog', {}, {})
+      .then(data => {
+        console.log(data.data);
+      //  var replacD = data.data.replace(/T/g, 'checkmark-circle-outline');
+    //    var replaceE = replacD.replace(/F/g, 'alert');
+        var replaceF = data.data.replace(/'/g, '"');
+        var replaced = JSON.parse(replaceF);
+        var list = replaced["list"];
+        for (let i = 0; i < list.length; i++) {
+          console.log(list[i]);
+          if (i == 0) {
+            if (list[i]["TF"] == "T") {
+              this.ri1 = "close-circle-outline";
+              this.rt1 = "正常にスパム除去が完了しました。";
+            } else {
+              this.ri1 = "alert";
+              this.rt1 = "スパム除去に失敗しました。再試行中です。";
+            }
+            var resJ = {
+              'icon': this.ri1,
+              'text': this.rt1,
+              'time': list[i]["time"]
+            };
+            this.r1 = resJ;
+          }
+          if (i == 1) {
+          if (list[i]["TF"] == "T") {
+              this.ri2 = "close-circle-outline";
+              this.rt2 = "正常にスパム除去が完了しました。";
+            } else {
+              this.ri2 = "alert";
+              this.rt2 = "スパム除去に失敗しました。再試行中です。";
+            }
+            var resJ = {
+              'icon': this.ri2,
+              'text': this.rt2,
+              'time': list[i]["time"]
+            };
+            this.r2 = resJ;
+          }
+          if (i == 2) {
+            if (list[i]["TF"] == "T") {
+              this.ri3 = "close-circle-outline";
+              this.rt3 = "正常にスパム除去が完了しました。";
+            } else {
+              this.ri3 = "alert";
+              this.rt3 = "スパム除去に失敗しました。再試行中です。";
+            }
+            var resJ = {
+              'icon': this.ri3,
+              'text': this.rt3,
+              'time': list[i]["time"]
+            };
+            console.log(resJ);
+            this.r3 = resJ;
+          }
+        } 
+      })
+      .catch(error => {
+        this.loader2 = false;
+        console.log(error);
+        console.log(error.status);
+        console.log(error.error); // error message as string
+        console.log(error.headers);
+      });
+}
 }

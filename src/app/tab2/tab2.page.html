@@ -14,7 +14,7 @@
     </ion-card-header>
   
     <ion-card-content>
-      <div *ngIf="!resnotify && !noupdate" style="text-align: center;">
+      <div *ngIf="loader" style="text-align: center;">
       <ion-spinner></ion-spinner>
       <p>読み込み中...</p>
       </div>
@@ -29,10 +29,10 @@
           <ion-label>{{n3.title}}</ion-label>
         </ion-item>
       </ion-list>
- <div style="text-align: center" *ngIf="n4">
+ <div style="text-align: center" *ngIf="n4 && !notifyEM">
   ...
- </div><p *ngIf="noupdate && resnotify" style="text-align: center;">お知らせは現在ありません。</p>
- <div *ngIf="!noupdate" style="text-align: center;"><ion-button (click)="gonotify()" fill="outline" style="text-align: center;" slot="end">お知らせを確認する</ion-button></div>
+ </div><p *ngIf="notifyEM && !loader && !n1 && !n4 && !n3 && !n4" style="text-align: center;">お知らせは現在ありません。</p>
+ <div *ngIf="n1 && !loader" style="text-align: center;"><ion-button (click)="gonotify()" fill="outline" style="text-align: center;" slot="end">お知らせを確認する</ion-button></div>
     </ion-card-content>
   </ion-card>
   <ion-card>
@@ -42,8 +42,27 @@
     </ion-card-header>
   
     <ion-card-content>
-      Keep close to Nature's heart... and break clear away, once in awhile,
-      and climb a mountain or spend a week in the woods. Wash your spirit clean.
+      <div *ngIf="loader2 && !r1" style="text-align: center;">
+        <ion-spinner></ion-spinner>
+        <p>読み込み中...</p>
+        </div>
+        <ion-list>
+          <ion-item *ngIf="r1">
+            <ion-icon slot="end" [name]="r1.icon"></ion-icon>
+            <h2>{{r1.text}}</h2>
+            <p>{{r1.time}}</p>
+          </ion-item>
+          <ion-item *ngIf="r2">
+            <ion-icon slot="end" [name]="r2.icon"></ion-icon>
+            <h2>{{r2.text}}</h2>
+            <p>{{r2.time}}</p>
+          </ion-item>
+          <ion-item *ngIf="r3">
+            <ion-icon slot="end" [name]="r3.icon"></ion-icon>
+            <h2>{{r3.text}}</h2>
+            <p>{{r3.time}}</p>
+          </ion-item>
+        </ion-list>
     </ion-card-content>
   </ion-card>
   <ion-card>
