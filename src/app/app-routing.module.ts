@@ -13,6 +13,10 @@ const routes: Routes = [
   {
     path: 'notify',
     loadChildren: () => import('./notify/notify.module').then( m => m.NotifyPageModule)
+  },
+  {
+    path: 'first',
+    loadChildren: () => import('./first/first.module').then( m => m.FirstPageModule)
   }
 ];
 @NgModule({

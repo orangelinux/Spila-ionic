@@ -28,8 +28,21 @@ export class AppComponent {
     this.initializeApp();
   }
 
-  initializeApp() {
-    this.platform.ready().then(() => {
+  async initializeApp() {
+    await this.platform.ready().then(() => {
+      try {
+        this.storage.get('tutorialComplete').then((val) => {
+          console.log(val);
+          console.log("TTCMP");
+          if (!val) {
+            console.log("OK=TUTORIAL");
+            this._router.navigate(['/first']);
+          }
+        });
+      } catch {
+        console.log("ERR=TUTORIAL");
+        this._router.navigate(['/first']);
+      }
       this.statusBar.backgroundColorByHexString('#ffffff');
       this.deeplinks.route({
         '/login': TabsPage,

@@ -45,7 +45,7 @@ export class TabsPage {
     this.set();
     this.auth();
   }
-async ionViewWillEnter(){
+  async ionViewWillEnter() {
   if (this.network.type === 'none') {
     console.log('network was disconnected :-(');
     const toast = await this.toastController.create({
@@ -82,20 +82,5 @@ async ionViewWillEnter(){
   auth() {
     console.log(this.D1);
     console.log(this.D2);
-  this.http.get('http://ionic.io', {}, {})
-  .then(data => {
-
-    console.log(data.status);
-    console.log(data.data); // data received by server
-    console.log(data.headers);
-
-  })
-  .catch(error => {
-
-    console.log(error.status);
-    console.log(error.error); // error message as string
-    console.log(error.headers);
-
-  });
   }
 }
