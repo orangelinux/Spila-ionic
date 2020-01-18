@@ -17,6 +17,10 @@ const routes: Routes = [
   {
     path: 'first',
     loadChildren: () => import('./first/first.module').then( m => m.FirstPageModule)
+  },
+  {
+    path: 'offline',
+    loadChildren: () => import('./offline/offline.module').then( m => m.OfflinePageModule)
   }
 ];
 @NgModule({

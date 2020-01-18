@@ -1,7 +1,7 @@
+import { NetworkService } from './../network.service';
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { ToastController,Platform } from '@ionic/angular';
-import { Network } from '@ionic-native/network/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { HTTP } from '@ionic-native/http/ngx';
 import { SecureStorage, SecureStorageObject } from '@ionic-native/secure-storage/ngx';
@@ -15,6 +15,7 @@ export class TabsPage {
   private queryParams: any;
   private user: any;
   private key: any;
+  public networkService: NetworkService;
   private D1: any;
   private D2: any;
 
@@ -22,7 +23,6 @@ export class TabsPage {
     private _router: Router,
     private platform: Platform,
     private iab: InAppBrowser,
-    private network: Network,
     public toastController: ToastController,
     private secureStorage: SecureStorage,
     private storage: Storage,
@@ -46,15 +46,8 @@ export class TabsPage {
     this.auth();
   }
   async ionViewWillEnter() {
-  if (this.network.type === 'none') {
-    console.log('network was disconnected :-(');
-    const toast = await this.toastController.create({
-      message: 'お使いの端末はインターネットに接続されていません。インターネット接続後、再度アプリケーションを起動してください。',
-      duration: 4000
-    });
-    toast.present();
   }
-}
+
   set() {
     this.storage.get('user').then((val) => {
       console.log('==', val);

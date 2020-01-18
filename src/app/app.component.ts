@@ -1,3 +1,4 @@
+import { NetworkService } from './network.service';
 import { Tab1Page } from './tab1/tab1.page';
 import { Component } from '@angular/core';
 import { Deeplinks } from '@ionic-native/deeplinks/ngx';
@@ -17,6 +18,7 @@ import { Storage } from '@ionic/storage';
 export class AppComponent {
   params: any;
   constructor(
+    private networkService:NetworkService,
     private platform: Platform,
     private network: Network,
     private splashScreen: SplashScreen,
@@ -30,6 +32,17 @@ export class AppComponent {
 
   async initializeApp() {
     await this.platform.ready().then(() => {
+      if (this.network.type === 'none') {
+        this._router.navigate(['/offline']);
+      } else {
+        console.log("online");
+      }
+    /*  console.log(net);
+      if (!net) {
+        this._router.navigate(['/offline']);
+      } else if (net) {
+        console.log("online");
+      }*/
       try {
         this.storage.get('tutorialComplete').then((val) => {
           console.log(val);

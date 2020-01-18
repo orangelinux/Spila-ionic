@@ -1,3 +1,4 @@
+import { NetworkService } from './network.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -22,6 +23,7 @@ import { Deeplinks } from '@ionic-native/deeplinks/ngx';
     HTTP,
     Network,
     InAppBrowser,
+    NetworkService,
     SplashScreen,
     Deeplinks,
     SecureStorage,
