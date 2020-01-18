@@ -11,7 +11,7 @@ export class FirstPage implements OnInit {
   constructor(public _router:Router,public storage:Storage) { }
 
   async ngOnInit() {
-    try {
+  /*  try {
       this.storage.get('tutorialComplete').then((val) => {
         console.log(val);
         console.log("TTCMP");
@@ -22,7 +22,7 @@ export class FirstPage implements OnInit {
       });
     } catch {
       console.log("ERR=TUTORIAL");
-    }
+    }*/
   }
   policy(ev) {
     console.log("policy");
