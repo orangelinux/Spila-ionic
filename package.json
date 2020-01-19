@@ -19,6 +19,7 @@
     "@angular/platform-browser": "~8.1.2",
     "@angular/platform-browser-dynamic": "~8.1.2",
     "@angular/router": "~8.1.2",
+    "@ionic-native/admob-free": "^5.19.1",
     "@ionic-native/core": "^5.0.0",
     "@ionic-native/deeplinks": "^5.19.0",
     "@ionic-native/http": "^5.18.0",
@@ -29,6 +30,7 @@
     "@ionic-native/status-bar": "^5.0.0",
     "@ionic/angular": "^4.7.1",
     "@ionic/storage": "^2.2.0",
+    "cordova-admob-sdk": "^0.24.1",
     "cordova-android": "^8.1.0",
     "cordova-browser": "^6.0.0",
     "cordova-plugin-admob-free": "^0.27.0",
@@ -111,7 +113,10 @@
         "DEEPLINK_5_SCHEME": " ",
         "DEEPLINK_5_HOST": " "
       },
-      "cordova-plugin-network-information": {}
+      "cordova-plugin-network-information": {},
+      "cordova-plugin-admob-free": {
+        "ADMOB_APP_ID": "ca-app-pub-5780765835835702~5737095926"
+      }
     },
     "platforms": [
       "browser",

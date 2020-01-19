@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HTTP } from '@ionic-native/http/ngx';
 import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
+import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free/ngx';
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
@@ -27,7 +28,7 @@ export class Tab2Page {
   rt3: any;
   notifyarray: any;
   resnotify: any;
-  constructor(private _router: Router, private storage: Storage, private http: HTTP) { }
+  constructor(private admobFree:AdMobFree,private _router: Router, private storage: Storage, private http: HTTP) {this.setads();}
   async ionViewWillEnter() {
     console.log("ionViewWillEnter");
     await this.viewnotify();
@@ -37,7 +38,23 @@ export class Tab2Page {
     console.log("NGONINIT");
     this.Newnotifycheck();
   }
-  
+  setads() {
+    const bannerConfig: AdMobFreeBannerConfig = {
+      // add your config here
+      id:'ca-app-pub-5780765835835702/9101625866',
+      // for the sake of this example we will just use the test config
+      isTesting: false,
+      autoShow: true
+     };
+     this.admobFree.banner.config(bannerConfig);
+     
+     this.admobFree.banner.prepare()
+       .then(() => {
+         // banner Ad is ready
+         // if we set autoShow to false, then we will need to call the show method here
+       })
+       .catch(e => console.log(e));
+  }
   async Newnotifycheck() {
     this.loader = true;
     await this.http.get('https://spmoveapi.herokuapp.com/getnotify', {}, {})

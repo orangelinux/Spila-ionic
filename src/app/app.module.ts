@@ -9,6 +9,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppRoutingModule } from './app-routing.module';
 import { HTTP } from '@ionic-native/http/ngx';
 import { AppComponent } from './app.component';
+import { AdMobFree } from '@ionic-native/admob-free/ngx';
 import { Network } from '@ionic-native/network/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { IonicStorageModule } from '@ionic/storage';
@@ -28,6 +29,7 @@ import { Deeplinks } from '@ionic-native/deeplinks/ngx';
     Deeplinks,
     SecureStorage,
    // SecureStorageObject,
+    AdMobFree,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

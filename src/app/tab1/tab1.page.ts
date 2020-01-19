@@ -12,7 +12,11 @@ user: any;
   list: [];
   loader: any;
   D2: any;
-  constructor(private http: HTTP,public storage:Storage) { }
+  constructor(private http: HTTP, public storage: Storage) {
+
+   }
+ 
+
   async ionViewWillEnter() { 
     await this.setVal();
     await this.getnewuser();
