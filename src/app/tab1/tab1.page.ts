@@ -9,7 +9,7 @@ import { HTTP } from '@ionic-native/http/ngx';
 export class Tab1Page {
 user: any;
   D1: any;
-  list: any;
+  list: [];
   loader: any;
   D2: any;
   constructor(private http: HTTP,public storage:Storage) { }
@@ -34,14 +34,24 @@ user: any;
   }
   async getnewuser() {
     this.loader = true;
-    await this.http.get('https://spmoveapi.herokuapp.com/getblockuser?user=' + this.user + '&D1=' + this.D1 + '&D2=' + this.D2, {}, {})
+    const url = 'https://spmoveapi.herokuapp.com/getblockuser?user=' + this.user + '&D1=' + this.D1 + '&D2=' + this.D2;
+    await this.http.get(url, {}, {})
       .then(data => { 
-        console.log(data);
-        this.list = data;
+        console.log(data.data);
+        const rp1 = data.data.replace(']', "");
+        const rp2 = rp1.replace('[', "");
+        const ary = rp2.split(',');
+        console.log(rp2);
+        if (ary.length == 0) {
+          console.log("empgty list");
+        } else {
+          this.list = ary;
+        }
         this.loader = false;
       })
       .catch(error => {
         this.loader = false;
+        console.log(error);
        });
   }
 }
