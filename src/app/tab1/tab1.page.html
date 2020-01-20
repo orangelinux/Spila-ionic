@@ -7,14 +7,17 @@
 </ion-header>
 
 <ion-content>
-  <div *ngIf="loader && !list" style="padding: 100px 0px 0px 0px; text-align: center;">
+  <div *ngIf="loader && !arydata" style="padding: 100px 0px 0px 0px; text-align: center;">
     <ion-spinner></ion-spinner>
     <p>読み込み中...</p>
     </div>
     <ion-list>
-  <div *ngIf="!loader && !list" style="color: gray; padding: 100px 0px 0px 0px; text-align: center;">ブロックしたスパム送信者はまだいません。</div>
-  <ion-item *ngFor="let lists of list">
-    <ion-label>{{lists}}</ion-label>
+  <div *ngIf="!loader && !arydata" style="color: gray; padding: 100px 0px 0px 0px; text-align: center;">ブロックしたスパム送信者はまだいません。</div>
+  <ion-item *ngFor="let lists of arydata">
+    <ion-avatar slot="start">
+      <img [src]="lists.icon">
+    </ion-avatar>
+    <ion-label>{{lists.name}}</ion-label>
   </ion-item>
 </ion-list>
 </ion-content>

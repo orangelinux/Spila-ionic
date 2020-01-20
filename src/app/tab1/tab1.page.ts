@@ -11,6 +11,7 @@ user: any;
   D1: any;
   list: [];
   loader: any;
+  arydata: any;
   D2: any;
   constructor(private http: HTTP, public storage: Storage) {
 
@@ -36,21 +37,26 @@ user: any;
           this.D2 = val;
       });
   }
+
   async getnewuser() {
     this.loader = true;
-    const url = 'https://spmoveapi.herokuapp.com/getblockuser?user=' + this.user + '&D1=' + this.D1 + '&D2=' + this.D2;
+    const url = 'https://spmoveapi.herokuapp.com/getblockuserJSON?user=' + this.user + '&D1=' + this.D1 + '&D2=' + this.D2;
     await this.http.get(url, {}, {})
-      .then(data => { 
+      .then(data => {
         console.log(data.data);
-        const rp1 = data.data.replace(']', "");
-        const rp2 = rp1.replace('[', "");
-        const ary = rp2.split(',');
-        console.log(rp2);
-        if (ary.length == 0) {
-          console.log("empgty list");
-        } else {
-          this.list = ary;
-        }
+        /*  const rp1 = data.data.replace(']', "");
+          const rp2 = rp1.replace('[', "");
+          const ary = rp2.split(',');
+          console.log(rp2);*/
+        if (data.data[0]) {
+          /*    ary.forEach(function(val){
+                const ujson = this.iconget(val);
+                  this.arydata.push(ujson);
+                  console.log(ujson);
+              });
+              console.log(this.arydata);*/
+            this.arydata = data.data;
+      }
         this.loader = false;
       })
       .catch(error => {
@@ -58,4 +64,6 @@ user: any;
         console.log(error);
        });
   }
+ 
+  
 }
