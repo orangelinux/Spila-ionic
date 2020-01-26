@@ -42,7 +42,9 @@ export class TabsPage {
         this.auth();
       }
     );*/
+    //-----ionic serveデバッグ時はthis.setを無効にする-----
     this.set();
+    //------
     this.auth();
   }
   async ionViewWillEnter() {

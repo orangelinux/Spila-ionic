@@ -1,9 +1,12 @@
+import { CoinComponent } from './coin/coin.component';
+import { Observable } from 'rxjs';
+import { HttpClientModule } from '@angular/common/http';
 import { NetworkService } from './network.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { SecureStorage, SecureStorageObject } from '@ionic-native/secure-storage/ngx';
-import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { PopoverController,IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppRoutingModule } from './app-routing.module';
@@ -14,13 +17,14 @@ import { Network } from '@ionic-native/network/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { IonicStorageModule } from '@ionic/storage';
 import { Deeplinks } from '@ionic-native/deeplinks/ngx';
-
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,IonicStorageModule.forRoot()],
+  declarations: [AppComponent,CoinComponent],
+  entryComponents: [CoinComponent],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, IonicStorageModule.forRoot()],
+  exports: [HttpClientModule],
   providers: [
     StatusBar,
+    PopoverController,
     HTTP,
     Network,
     InAppBrowser,

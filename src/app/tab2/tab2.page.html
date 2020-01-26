@@ -1,5 +1,11 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons (click)="coinpop($events)" slot="end">
+      <div style="width: 30px;">
+      <img src="./assets/icon/coins.svg">
+      </div>
+      <p style="font-size: 20px; padding: 0; margin: 0;"> 0</p>
+       </ion-buttons>
     <ion-title>
       ホーム
     </ion-title>
@@ -67,13 +73,23 @@
   </ion-card>
   <ion-card>
     <ion-card-header>
-      <ion-card-title>最近ブロックしたDM</ion-card-title>
+      <ion-card-title>最近ブロックしたスパム送信者</ion-card-title>
     <!--  <ion-card-subtitle><ion-icon name="help-circle-outline"></ion-icon>説明を見る</ion-card-subtitle>-->
     </ion-card-header>
-  
     <ion-card-content>
-      Keep close to Nature's heart... and break clear away, once in awhile,
-      and climb a mountain or spend a week in the woods. Wash your spirit clean.
+      <div *ngIf="userloader" style="text-align: center;">
+        <ion-spinner></ion-spinner>
+        <p>読み込み中...</p>
+        </div>
+        <ion-list>
+          <div *ngIf="!userloader && !blockuserary" style="color: gray; padding: 100px 0px 0px 0px; text-align: center;">ブロックしたスパム送信者はまだいません。</div>
+          <ion-item *ngFor="let lists of blockuserary">
+            <ion-avatar slot="start">
+              <img [src]="lists.icon">
+            </ion-avatar>
+            <ion-label>{{lists.name}}</ion-label>
+          </ion-item>
+        </ion-list>
     </ion-card-content>
   </ion-card>
   <ion-card>

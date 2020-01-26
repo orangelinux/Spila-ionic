@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { HTTP } from '@ionic-native/http/ngx';
+import { HttpClient } from '@angular/common/http';
+import { PopoverController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
+import { CoinComponent } from '../coin/coin.component';
 import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free/ngx';
 @Component({
   selector: 'app-tab2',
@@ -13,6 +16,11 @@ export class Tab2Page {
   notifyEM: any;
   loader: any;
   loader2: any;
+  user: any;
+  blockuserary: any;
+  D1: any;
+  D2: any;
+  userloader: any;
   n1: any;
   n2: any;
   n3: any;
@@ -28,15 +36,40 @@ export class Tab2Page {
   rt3: any;
   notifyarray: any;
   resnotify: any;
-  constructor(private admobFree:AdMobFree,private _router: Router, private storage: Storage, private http: HTTP) {this.setads();}
+  constructor(public Popov:PopoverController,private httpAngular:HttpClient,private admobFree:AdMobFree,private _router: Router, private storage: Storage, private http: HTTP) {this.setads();}
   async ionViewWillEnter() {
+    await this.setVal();
     console.log("ionViewWillEnter");
     await this.viewnotify();
     await this.getlog();
+    await this.getnewblockuser();
+  }
+  async setVal() {
+    console.log("open Setval!");
+      await this.storage.get('user').then((val) => {
+        console.log('==', val);
+          this.user = val;
+      });
+      await this.storage.get('D1').then((val) => {
+        console.log('==', val);
+          this.D1 = val;
+      });
+      await this.storage.get('D2').then((val) => {
+        console.log('==', val);
+          this.D2 = val;
+      });
   }
   ngOnInit() {
     console.log("NGONINIT");
     this.Newnotifycheck();
+  }
+  async coinpop(ev: any) {
+    const popover = await this.Popov.create({
+      component: CoinComponent,
+      event: ev,
+      translucent: true
+    });
+    return await popover.present();
   }
   setads() {
     const bannerConfig: AdMobFreeBannerConfig = {
@@ -54,6 +87,27 @@ export class Tab2Page {
          // if we set autoShow to false, then we will need to call the show method here
        })
        .catch(e => console.log(e));
+  }
+
+  async getnewblockuser(){
+console.log("boot getnewuser");
+    this.userloader = true;
+    //let headers = new HttpHeaders();
+   // headers = headers.set('Content-Type', 'application/json; charset=utf-8');
+   // const url = "https://qiita.com/api/v2/items?per_page=100";
+    const url = 'https://spmoveapi.herokuapp.com/getblockuserJSON?user=' + this.user + '&D1=' + this.D1 + '&D2=' + this.D2;
+    await this.httpAngular.get(url)
+    .subscribe(res => {
+      console.log(res);
+      this.blockuserary = res;
+      this.blockuserary.reverse();
+      this.userloader = false;
+    }, error => {
+      
+        console.log(error);
+        this.userloader = false;
+  });
+    
   }
   async Newnotifycheck() {
     this.loader = true;
