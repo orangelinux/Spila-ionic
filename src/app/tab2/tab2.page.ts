@@ -21,6 +21,7 @@ export class Tab2Page {
   D1: any;
   D2: any;
   userloader: any;
+  bur: [];
   n1: any;
   n2: any;
   n3: any;
@@ -78,23 +79,20 @@ export class Tab2Page {
       // for the sake of this example we will just use the test config
       isTesting: false,
       autoShow: true
-     };
-     this.admobFree.banner.config(bannerConfig);
-     
-     this.admobFree.banner.prepare()
-       .then(() => {
+      };
+      this.admobFree.banner.config(bannerConfig);
+      
+      this.admobFree.banner.prepare()
+        .then(() => {
          // banner Ad is ready
          // if we set autoShow to false, then we will need to call the show method here
-       })
-       .catch(e => console.log(e));
+        })
+        .catch(e => console.log(e));
   }
 
   async getnewblockuser(){
 console.log("boot getnewuser");
     this.userloader = true;
-    //let headers = new HttpHeaders();
-   // headers = headers.set('Content-Type', 'application/json; charset=utf-8');
-   // const url = "https://qiita.com/api/v2/items?per_page=100";
     const url = 'https://spmoveapi.herokuapp.com/getblockuserJSON?user=' + this.user + '&D1=' + this.D1 + '&D2=' + this.D2;
     await this.httpAngular.get(url)
     .subscribe(res => {
@@ -102,39 +100,34 @@ console.log("boot getnewuser");
       this.blockuserary = res;
       this.blockuserary.reverse();
       this.userloader = false;
-    }, error => {
+      /* for(let i = 0; i < 2; i++) {
+        console.log(this.blockuserary[i]);
+        var buar = this.blockuserary[i];
+      }*/
+      console.log(this.bur);
+          }, error => {
       
         console.log(error);
         this.userloader = false;
   });
-    
   }
+
   async Newnotifycheck() {
     this.loader = true;
     await this.http.get('https://spmoveapi.herokuapp.com/getnotify', {}, {})
       .then(data => {
-        //ここからjsonの処理
-        console.log(data.status);
         console.log(data.data);
         var replaced = data.data.replace(/'/g, '"');
-        console.log(replaced);
         var res = JSON.parse(replaced);
-        var latest = res["latest"]; 
-        //ここまでjsonの処理　latestに中身が入る
-        this.storage.get('notify').then((val) => {
-          this.loader = false;
+        var latest = res["latest"];
+        //ここまでjsonの処理
           this.storage.get('notifyold').then((val2) => {
-            console.log('==', val);
-
-
             try {
-
-              const old = val2;
-              if (old.title == latest.title) {
+              if (val2.title == latest.title) {
                 console.log("更新なし");
-                this.notifyEM = true;
+                this.viewnotify();
               } else {
-                console.log("重複なし");
+                console.log("新規");
                 this.notifyEM = false;
                 this.setstorage(latest);
               }
@@ -142,46 +135,44 @@ console.log("boot getnewuser");
               this.setstorage(latest);
             }
           })
-        })
-
+      
       })
       .catch(error => {
         console.log(error);
-        console.log(error.status);
-        console.log(error.error); // error message as string
-        console.log(error.headers);
         this.loader = false;
   
       });
   }
   async setstorage(ARRAY) {
     console.log("boot setstorage");
-    try {
-      await this.storage.get('notify').then((val) => {
-        if (val) {
-          this.notifyarray = val;
-        } else {
-          this.notifyarray = [];
-        }
-        this.notifyarray.push(ARRAY);
-        this.storage.set('notify', this.notifyarray);
-        try {
-          this.storage.set('notifyold', this.notifyarray[0]);
-        } catch {
-          console.log('notifyold set error');
-        }
-        });
-      await this.viewnotify();
+    try{
+    await this.storage.get('notify').then((val) => {
+      if(val){
+      this.notifyarray = val;
+      } else {
+        this.notifyarray = [];
+      }
+    });
     } catch {
-      console.log("ERR");
-    }
+      this.notifyarray = [];
   }
+    this.notifyarray.push(ARRAY);
+    this.storage.set('notify', this.notifyarray);
+        try {
+          this.storage.set('notifyold', this.notifyarray[this.notifyarray.length - 1]);
+        } catch {
+          console.log('notifyold error');
+        }
+      this.viewnotify();
+  }
+
   async viewnotify() {
     console.log("boot viewnotify");
     this.storage.get('notify').then((val) => {
       if (val) {
         this.resnotify = val;
         console.log(this.resnotify);
+        this.resnotify.reverse();
         if (this.resnotify[0]) {
           this.n1 = this.resnotify[0];
         }

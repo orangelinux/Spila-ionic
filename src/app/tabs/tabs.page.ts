@@ -43,7 +43,7 @@ export class TabsPage {
       }
     );*/
     //-----ionic serveデバッグ時はthis.setを無効にする-----
-    this.set();
+  //  this.set();
     //------
     this.auth();
   }
