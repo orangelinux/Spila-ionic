@@ -52,7 +52,12 @@ user: any;
     await this.httpangular.get(url)
     .subscribe(res => {
       console.log(res);
-      this.arydata = res;
+      if (typeof this.arydata !== 'undefined' && this.arydata.length > 0) {
+        this.arydata = res;
+      } else {
+        console.log("empty ARRAY!");
+        this.arydata = false;
+      }
       this.loader = false;
     }, error => {
         this.arydata = false;

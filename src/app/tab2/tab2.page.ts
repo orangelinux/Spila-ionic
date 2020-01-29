@@ -17,6 +17,7 @@ export class Tab2Page {
   loader: any;
   loader2: any;
   user: any;
+  usericon: any;
   blockuserary: any;
   D1: any;
   D2: any;
@@ -44,6 +45,7 @@ export class Tab2Page {
     await this.viewnotify();
     await this.getlog();
     await this.getnewblockuser();
+    await this.usericonget();
   }
   async setVal() {
     console.log("open Setval!");
@@ -71,6 +73,18 @@ export class Tab2Page {
       translucent: true
     });
     return await popover.present();
+  }
+  async usericonget() {
+    console.log("usericonget");
+    const url = 'https://spmoveapi.herokuapp.com/imageurl?user=' + this.user;
+    console.log(url);
+    await this.http.get(url, {},{})
+    .then(data => {
+      console.log(data);
+      this.usericon = data.data;
+    }).catch(error => {     
+        console.log(error);
+  });
   }
   setads() {
     const bannerConfig: AdMobFreeBannerConfig = {
@@ -173,6 +187,7 @@ console.log("boot getnewuser");
         this.resnotify = val;
         console.log(this.resnotify);
         this.resnotify.reverse();
+        this.loader = false;
         if (this.resnotify[0]) {
           this.n1 = this.resnotify[0];
         }
