@@ -22,7 +22,7 @@
     "@angular/router": "~8.1.2",
     "@ionic-native/admob-free": "^5.19.1",
     "@ionic-native/core": "^5.0.0",
-    "@ionic-native/deeplinks": "^5.19.0",
+    "@ionic-native/deeplinks": "^5.20.0",
     "@ionic-native/http": "^5.18.0",
     "@ionic-native/in-app-browser": "^5.18.0",
     "@ionic-native/network": "^5.19.0",
@@ -99,8 +99,8 @@
       "cordova-plugin-inappbrowser": {},
       "ionic-plugin-deeplinks": {
         "URL_SCHEME": "spila",
-        "DEEPLINK_HOST": "example.com",
         "DEEPLINK_SCHEME": "https",
+        "DEEPLINK_HOST": "spmove-a5a1e.web.app",
         "ANDROID_PATH_PREFIX": "/",
         "ANDROID_2_PATH_PREFIX": "/",
         "ANDROID_3_PATH_PREFIX": "/",
@@ -121,8 +121,7 @@
       }
     },
     "platforms": [
-      "browser",
-      "android"
+      "browser"
     ]
   }
 }

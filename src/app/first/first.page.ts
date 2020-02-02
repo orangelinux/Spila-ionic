@@ -38,6 +38,6 @@ export class FirstPage implements OnInit {
   async btnclick() {
     console.log("BTN CLICK");
     await this.storage.set('tutorialComplete', 'true');
-    this._router.navigate(['/tabs']);
+    this._router.navigate(['/login']);
   }
 }

@@ -58,7 +58,7 @@ export class AppComponent {
       }
       this.statusBar.backgroundColorByHexString('#ffffff');
       this.deeplinks.route({
-        '/login': TabsPage,
+        '/GTR': TabsPage,
       }).subscribe(match => {
         console.log('Success', match);
         this.params = match.$args;

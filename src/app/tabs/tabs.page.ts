@@ -51,15 +51,17 @@ export class TabsPage {
   }
 
   set() {
-    this.storage.get('user').then((val) => {
-      console.log('==', val);
-      if (!val && !this.user) {
-        this._router.navigate(["/login"]);
-      }
-      if (!this.user) {
-        this.user = val;
-      }
-    });
+    console.log("booting set");
+    try {
+      this.storage.get('user').then((val) => {
+        console.log('==', val);
+        if (!val) {
+          this._router.navigate(["/login"]);
+        }
+      });
+    } catch {
+      console.log("err");
+    }
     this.storage.get('D1').then((val) => {
       console.log('==', val);
       if (!this.D1) {
