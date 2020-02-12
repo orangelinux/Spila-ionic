@@ -18,6 +18,7 @@ export class Tab3Page {
   user: any;
   D1: any;
   business: any;
+  dark: any;
   notify: any;
   otherspam: any;
   crack: any;
@@ -35,10 +36,14 @@ export class Tab3Page {
     this.storage.remove('user');
     this._router.navigate(["/login"]);
   }
-
+  async darkchange(ev) {
+    console.log("this.darkchange");
+    var tf = ev["detail"]["checked"];
+    document.body.classList.toggle('dark', tf);
+}
   async setr() {
     const loading = await this.loadingController.create({
-      message: '通信中です..お待ちください...',
+      message: '設定を取得中です..しばらくお待ちください...',
       translucent: true,
     });
     var url = 'https://spmoveapi.herokuapp.com/sendset?user=' + this.user + '&D1=' + this.D1 + '&D2=' + this.D2;
@@ -117,7 +122,7 @@ export class Tab3Page {
   async setreset() {
     this.setVal();
     const loading = await this.loadingController.create({
-      message: '通信中です..お待ちください...',
+      message: '設定をリセット中です..お待ちください...',
       translucent: true,
       cssClass: 'custom-class custom-loading'
     });
@@ -144,7 +149,7 @@ export class Tab3Page {
 
   async SetSend(tf,change) {
     const loading = await this.loadingController.create({
-      message: '通信中です..お待ちください...',
+      message: '設定中です...しばらくお待ちください...',
       translucent: true,
       cssClass: 'custom-class custom-loading'
     });

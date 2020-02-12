@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header translucent>
   <ion-toolbar>
     <ion-title>
      設定
@@ -45,4 +45,12 @@
   <ion-button (click)="logout()" color="success" fill="outline" expand="block"><ion-icon name="document"></ion-icon> 使用方法を見る</ion-button>
   <ion-button (click)="logout()" color="medium" fill="outline" expand="block"><ion-icon name="copy"></ion-icon> 利用規約</ion-button>
   <ion-button (click)="logout()" color="medium" fill="outline" expand="block"><ion-icon name="copy"></ion-icon> ライセンス</ion-button>
+<!--<hr>
+  <h3>試験中の機能</h3>
+  <p>これらは試験中の機能です。有効にすることで動作が不安定になる可能性があります。</p>
+<hr>
+  <ion-item>
+    <ion-label>ダークモードを使用する</ion-label>
+    <ion-toggle slot="start" [(ngModel)]="dark"  (ionChange)="darkchange($event)"></ion-toggle>
+  </ion-item>-->
 </ion-content>

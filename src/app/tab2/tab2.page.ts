@@ -17,8 +17,9 @@ export class Tab2Page {
   loader: any;
   loader2: any;
   user: any;
+  $events: any;
   usericon: any;
-  blockuserary: any;
+  arydata: any;
   D1: any;
   D2: any;
   userloader: any;
@@ -41,11 +42,15 @@ export class Tab2Page {
   constructor(public Popov:PopoverController,private httpAngular:HttpClient,private admobFree:AdMobFree,private _router: Router, private storage: Storage, private http: HTTP) {this.setads();}
   async ionViewWillEnter() {
     await this.setVal();
+    await this.runs();
     console.log("ionViewWillEnter");
-    await this.viewnotify();
-    await this.getlog();
-    await this.getnewblockuser();
-    await this.usericonget();
+
+  }
+  async runs() {
+    this.viewnotify();
+    this.getlog();
+    this.getnewblockuser();
+    this.usericonget();
   }
   async setVal() {
     console.log("open Setval!");
@@ -111,16 +116,21 @@ console.log("boot getnewuser");
     await this.httpAngular.get(url)
     .subscribe(res => {
       console.log(res);
-      this.blockuserary = res;
-      this.blockuserary.reverse();
-      this.userloader = false;
+      this.arydata = res;
+      if (this.arydata.length > 0) {
+        this.arydata.reverse();
+        this.userloader = false;
+      } else {
+        console.log("empty ARRAY!");
+        this.userloader = false;
+        this.arydata = false;
+      }
       /* for(let i = 0; i < 2; i++) {
         console.log(this.blockuserary[i]);
         var buar = this.blockuserary[i];
       }*/
       console.log(this.bur);
           }, error => {
-      
         console.log(error);
         this.userloader = false;
   });
