@@ -93,9 +93,7 @@
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-secure-storage": {},
       "cordova-sqlite-storage": {},
-      "cordova-plugin-advanced-http": {
-        "OKHTTP_VERSION": "3.10.0"
-      },
+      "cordova-plugin-advanced-http": {},
       "cordova-plugin-inappbrowser": {},
       "ionic-plugin-deeplinks": {
         "URL_SCHEME": "spila",
@@ -116,9 +114,7 @@
         "DEEPLINK_5_HOST": " "
       },
       "cordova-plugin-network-information": {},
-      "cordova-plugin-admob-free": {
-        "ADMOB_APP_ID": "ca-app-pub-5780765835835702~5737095926"
-      }
+      "cordova-plugin-admob-free": {}
     },
     "platforms": [
       "browser"

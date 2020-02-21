@@ -5,7 +5,6 @@ import { PopoverController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
 import { CoinComponent } from '../coin/coin.component';
-import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free/ngx';
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
@@ -39,7 +38,7 @@ export class Tab2Page {
   rt3: any;
   notifyarray: any;
   resnotify: any;
-  constructor(public Popov:PopoverController,private httpAngular:HttpClient,private admobFree:AdMobFree,private _router: Router, private storage: Storage, private http: HTTP) {this.setads();}
+  constructor(public Popov:PopoverController,private httpAngular:HttpClient,private _router: Router, private storage: Storage, private http: HTTP) {}
   async ionViewWillEnter() {
     await this.setVal();
     await this.runs();
@@ -91,24 +90,6 @@ export class Tab2Page {
         console.log(error);
   });
   }
-  setads() {
-    const bannerConfig: AdMobFreeBannerConfig = {
-      // add your config here
-      id:'ca-app-pub-5780765835835702/9101625866',
-      // for the sake of this example we will just use the test config
-      isTesting: false,
-      autoShow: true
-      };
-      this.admobFree.banner.config(bannerConfig);
-      
-      this.admobFree.banner.prepare()
-        .then(() => {
-         // banner Ad is ready
-         // if we set autoShow to false, then we will need to call the show method here
-        })
-        .catch(e => console.log(e));
-  }
-
   async getnewblockuser(){
 console.log("boot getnewuser");
     this.userloader = true;

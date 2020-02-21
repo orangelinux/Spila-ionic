@@ -5,7 +5,8 @@ import { ToastController,Platform } from '@ionic/angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { HTTP } from '@ionic-native/http/ngx';
 import { SecureStorage, SecureStorageObject } from '@ionic-native/secure-storage/ngx';
-import { RouterModule, Routes,Router,ActivatedRoute } from '@angular/router';
+import { RouterModule, Routes, Router, ActivatedRoute } from '@angular/router';
+import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free/ngx';
 @Component({
   selector: 'app-tabs',
   templateUrl: 'tabs.page.html',
@@ -19,7 +20,9 @@ export class TabsPage {
   private D1: any;
   private D2: any;
 
-  constructor( private _activatedRoute: ActivatedRoute,
+  constructor(
+    private admobFree:AdMobFree,
+    private _activatedRoute: ActivatedRoute,
     private _router: Router,
     private platform: Platform,
     private iab: InAppBrowser,
@@ -27,7 +30,7 @@ export class TabsPage {
     private secureStorage: SecureStorage,
     private storage: Storage,
     private http:HTTP
-  ) { }
+  ) { this.setads();}
   ngOnInit() {
 
   /*  this._activatedRoute.queryParams.subscribe(
@@ -49,7 +52,24 @@ export class TabsPage {
   }
   async ionViewWillEnter() {
   }
-
+  setads() {
+    const bannerConfig: AdMobFreeBannerConfig = {
+      // add your config here
+      id:'ca-app-pub-5780765835835702/9101625866',
+      // for the sake of this example we will just use the test config
+      isTesting: false,
+      autoShow: true
+      };
+      this.admobFree.banner.config(bannerConfig);
+      
+      this.admobFree.banner.prepare()
+        .then(() => {
+         // banner Ad is ready
+         // if we set autoShow to false, then we will need to call the show method here
+          this.admobFree.banner.show();
+        })
+        .catch(e => console.log(e));
+  }
   set() {
     console.log("booting set");
     try {
